@@ -88,16 +88,21 @@ def continuar(semf):
             soltarTenedores(hilo_actual)
 
 
-visualizar()
+def main():
+    visualizar()
 
-number = input('Numero de iteraciones deseadas: ')
-semaforo = threading.Semaphore(5)
-for iteraciones in range(int(number)):
-    for num_hilo in range(5):
-        hilo = threading.Thread(name=f'{num_hilo}', target=continuar, args=(semaforo,))
-        hilo.start()
-        hilo.join()
+    number = input('Numero de iteraciones deseadas: ')
+    semaforo = threading.Semaphore(5)
+    for iteraciones in range(int(number)):
+        for num_hilo in range(5):
+            hilo = threading.Thread(name=f'{num_hilo}', target=continuar, args=(semaforo,))
+            hilo.start()
+            hilo.join()
 
-clear_console()
-print(f'= Resultado despues de {number} iteraciones =')
-visualizar()
+    clear_console()
+    print(f'= Resultado despues de {number} iteraciones =')
+    visualizar()
+
+
+if __name__ == "__main__":
+    main()
