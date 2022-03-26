@@ -72,19 +72,19 @@ def soltarTenedores(num):
         tenedores[num][1] += 1
         tenedores[num + 1][0] += 1
         tenedoresNumero[num] -= 1
+    numeroCenas[num] += 1
 
 
 def continuar(semf):
     global tenedores
     global tenedoresNumero
-    hilo_actual = int(threading.current_thread().getName())
+    hilo_actual = int(threading.current_thread().name)
 
     with semf:
         tenedorDer(hilo_actual)
         tenedorIzq(hilo_actual)
 
         if tenedoresNumero[hilo_actual] == 2:
-            numeroCenas[hilo_actual] += 1
             soltarTenedores(hilo_actual)
 
 
