@@ -1,11 +1,6 @@
 import threading
 import os
 
-# Estado neutro
-# tenedores = [[1, 1], [1, 1], [1, 1], [1, 1], [1, 1]]
-# tenedoresNumero = [0, 0, 0, 0, 0]
-
-# Estado de inicio
 tenedores = [[0, 0], [0, 0], [0, 0], [0, 1], [1, 0]]
 tenedoresNumero = [0, 1, 1, 1, 1]
 numeroCenas = [0, 0, 0, 0, 0]
@@ -34,13 +29,11 @@ def visualizar():
 # tenedores[i][1] = Tenedor derecho
 def tenedorIzq(num):
     if num == 0 and tenedores[4][1] - 1 == 0:
-        # print(f'Izq: {num}')
         tenedores[num][0] -= 1
         tenedores[4][1] -= 1
         tenedoresNumero[num] += 1
 
     elif num != 0 and tenedores[num - 1][1] - 1 == 0:
-        # print(f'Izq: {num}')
         tenedores[num][0] -= 1
         tenedores[num - 1][1] -= 1
         tenedoresNumero[num] += 1
@@ -48,13 +41,11 @@ def tenedorIzq(num):
 
 def tenedorDer(num):
     if num == 4 and tenedores[0][0] - 1 == 0:
-        # print(f'Der: {num}')
         tenedores[num][1] -= 1
         tenedores[0][0] -= 1
         tenedoresNumero[num] += 1
 
     elif num != 4 and tenedores[num + 1][0] - 1 == 0:
-        # print(f'Der: {num}')
         tenedores[num][1] -= 1
         tenedores[num + 1][0] -= 1
         tenedoresNumero[num] += 1
@@ -97,25 +88,6 @@ def continuar(semf):
             soltarTenedores(hilo_actual)
 
 
-"""def iniciar(semf):
-    global tenedores
-    global tenedoresNumero
-    hilo_actual = int(threading.current_thread().getName())
-    with semf:
-        if hilo_actual < 4:
-            if hilo_actual == 0:
-                tenedorDer(4)
-            tenedorIzq(hilo_actual)
-
-
-bloquea = threading.Lock()
-
-semaforo = threading.Semaphore(1)
-for num_hilo in range(5):
-    hilo = threading.Thread(name=f'{num_hilo}', target=iniciar, args=(semaforo,))
-    hilo.start()
-    hilo.join()
-"""
 visualizar()
 
 number = input('Numero de iteraciones deseadas: ')
